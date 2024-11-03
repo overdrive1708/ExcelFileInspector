@@ -86,6 +86,16 @@ namespace ExcelFileInspector.ViewModels
         }
 
         /// <summary>
+        /// 検査ファイルガイド表示可否
+        /// </summary>
+        private bool _inspectionFilesGuideVisibility = true;
+        public bool InspectionFileGuideVisibility
+        {
+            get { return _inspectionFilesGuideVisibility; }
+            set { SetProperty(ref _inspectionFilesGuideVisibility, value); }
+        }
+
+        /// <summary>
         /// 検査結果
         /// </summary>
         private ObservableCollection<Inspector.InspectionResult> _inspectionResultList = [];
@@ -263,6 +273,7 @@ namespace ExcelFileInspector.ViewModels
         {
             // 検査ファイルリストをクリア
             InspectionFiles.Clear();
+            InspectionFileGuideVisibility = true;
 
             // 検査実施できるか確認
             CheckExecuteInspection();
@@ -297,19 +308,42 @@ namespace ExcelFileInspector.ViewModels
                         {
                             foreach (string file in files)
                             {
-                                if (file.Contains(TargetFileKeyword) && (System.IO.Path.GetExtension(file) == ".xlsx" || System.IO.Path.GetExtension(file) == ".xlsm"))
+                                if (TargetFileKeyword == string.Empty)
                                 {
-                                    InspectionFiles.Add(file);
+                                    // 対象ファイルキーワードが空の場合は拡張子のみ判定
+                                    if (System.IO.Path.GetExtension(file) == ".xlsx" || System.IO.Path.GetExtension(file) == ".xlsm")
+                                    {
+                                        InspectionFiles.Add(file);
+                                    }
+                                }
+                                else
+                                {
+                                    // 対象ファイルキーワードが空ではない場合はキーワードと拡張子を判定
+                                    if (System.IO.Path.GetFileName(file).Contains(TargetFileKeyword) && (System.IO.Path.GetExtension(file) == ".xlsx" || System.IO.Path.GetExtension(file) == ".xlsm"))
+                                    {
+                                        InspectionFiles.Add(file);
+                                    }
                                 }
                             }
                         }
                     }
                     else
                     {
-                        // 対象ファイルキーワードを含むサポートExcelファイルの場合は検査ファイルのリストに追加
-                        if (dropitem.Contains(TargetFileKeyword) && (System.IO.Path.GetExtension(dropitem) == ".xlsx" || System.IO.Path.GetExtension(dropitem) == ".xlsm"))
+                        if (TargetFileKeyword == string.Empty)
                         {
-                            InspectionFiles.Add(dropitem);
+                            // 対象ファイルキーワードが空の場合は拡張子のみ判定
+                            if (System.IO.Path.GetExtension(dropitem) == ".xlsx" || System.IO.Path.GetExtension(dropitem) == ".xlsm")
+                            {
+                                InspectionFiles.Add(dropitem);
+                            }
+                        }
+                        else
+                        {
+                            // 対象ファイルキーワードを含むサポートExcelファイルの場合は検査ファイルのリストに追加
+                            if (System.IO.Path.GetFileName(dropitem).Contains(TargetFileKeyword) && (System.IO.Path.GetExtension(dropitem) == ".xlsx" || System.IO.Path.GetExtension(dropitem) == ".xlsm"))
+                            {
+                                InspectionFiles.Add(dropitem);
+                            }
                         }
                     }
                 }
@@ -372,6 +406,7 @@ namespace ExcelFileInspector.ViewModels
                 // チェック通過時検査実施可能
                 IsOperationEnable = true;
                 ProgressMessage = Resources.Strings.MessageStatusAlreadyInspection;
+                InspectionFileGuideVisibility = false;
             }
         }
     }

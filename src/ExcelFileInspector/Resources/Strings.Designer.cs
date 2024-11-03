@@ -171,6 +171,17 @@ namespace ExcelFileInspector.Resources {
         }
         
         /// <summary>
+        ///   検査したいファイル　もしくは　検査したいファイルが含まれるフォルダを
+        ///ドラッグ&amp;ドロップしてください｡
+        ///対象ファイルキーワードを含むファイルのみ検査ファイルに登録されます｡ に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string MessageGuideDragAndDrop {
+            get {
+                return ResourceManager.GetString("MessageGuideDragAndDrop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   このアプリケーションのプロジェクトURLを開く に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string MessageOpenProjectUrl {

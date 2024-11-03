@@ -16,6 +16,11 @@
     prism:ViewModelLocator.AutoWireViewModel="True"
     ResizeMode="NoResize"
     mc:Ignorable="d">
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolVisibilityConverter" />
+    </Window.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
@@ -77,20 +82,38 @@
             Margin="10,10,10,10"
             Header="{x:Static resources:Strings.InspectionFile}">
             <StackPanel>
-                <ListBox
-                    Height="200"
-                    Margin="10,5,10,5"
-                    AllowDrop="True"
-                    ItemsSource="{Binding InspectionFiles}">
-                    <bh:Interaction.Triggers>
-                        <bh:EventTrigger EventName="PreviewDragOver">
-                            <prism:InvokeCommandAction Command="{Binding CommandInspectionPreviewDragOver}" />
-                        </bh:EventTrigger>
-                        <bh:EventTrigger EventName="Drop">
-                            <prism:InvokeCommandAction Command="{Binding CommandInspectionFileDrop}" />
-                        </bh:EventTrigger>
-                    </bh:Interaction.Triggers>
-                </ListBox>
+                <Grid>
+                    <ListBox
+                        Height="200"
+                        Margin="10,5,10,5"
+                        AllowDrop="True"
+                        ItemsSource="{Binding InspectionFiles}">
+                        <bh:Interaction.Triggers>
+                            <bh:EventTrigger EventName="PreviewDragOver">
+                                <prism:InvokeCommandAction Command="{Binding CommandInspectionPreviewDragOver}" />
+                            </bh:EventTrigger>
+                            <bh:EventTrigger EventName="Drop">
+                                <prism:InvokeCommandAction Command="{Binding CommandInspectionFileDrop}" />
+                            </bh:EventTrigger>
+                        </bh:Interaction.Triggers>
+                    </ListBox>
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        AllowDrop="True"
+                        Text="{x:Static resources:Strings.MessageGuideDragAndDrop}"
+                        TextAlignment="Center"
+                        Visibility="{Binding InspectionFileGuideVisibility, Converter={StaticResource BoolVisibilityConverter}}">
+                        <bh:Interaction.Triggers>
+                            <bh:EventTrigger EventName="PreviewDragOver">
+                                <prism:InvokeCommandAction Command="{Binding CommandInspectionPreviewDragOver}" />
+                            </bh:EventTrigger>
+                            <bh:EventTrigger EventName="Drop">
+                                <prism:InvokeCommandAction Command="{Binding CommandInspectionFileDrop}" />
+                            </bh:EventTrigger>
+                        </bh:Interaction.Triggers>
+                    </TextBlock>
+                </Grid>
                 <Button
                     Margin="10,5,10,5"
                     Command="{Binding CommandClearInspectionFile}"

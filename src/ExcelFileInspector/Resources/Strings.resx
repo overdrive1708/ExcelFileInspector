@@ -177,4 +177,9 @@
   <data name="MessageStatusNowInspection" xml:space="preserve">
     <value>検査を行っています｡({0}/{1})</value>
   </data>
+  <data name="MessageGuideDragAndDrop" xml:space="preserve">
+    <value>検査したいファイル　もしくは　検査したいファイルが含まれるフォルダを
+ドラッグ&amp;ドロップしてください｡
+対象ファイルキーワードを含むファイルのみ検査ファイルに登録されます｡</value>
+  </data>
 </root>
