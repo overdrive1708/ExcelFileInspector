@@ -29,11 +29,28 @@
 
 ## 初回セットアップ
 
-T.B.D.
+1. ｢ExcelFileInspector.exe｣を一回起動して終了してください｡｢InspectionSettings.json｣が生成されます｡
+1. [設定例](docs/設定例InspectionSettings.json)を参考に｢InspectionSettings.json｣を記載してください｡
+
+｢InspectionSettings.json｣で設定する設定項目は以下のとおりです｡
+| 設定項目 | 設定内容 |
+| --- | --- |
+| PresetName | プリセットを識別するための名前を設定します｡ |
+| TargetFileKeyword | 検査ファイルの一覧に登録する際のキーワードを設定します｡<br>検査ファイルに検査対象フォルダもしくは検査対象ファイルをドラッグ&ドロップした際に､設定したキーワードを含むファイルのみを検査対象とします｡ |
+| InspectionMethods | Conditionによって設定値が異なるため､後述する説明を参照してください｡ |
+
+｢InspectionSettings.json｣で設定するConditionは以下をサポートしています｡
+| Condition | 設定時の挙動 |
+|---|---|
+| Equal | SheetNameで設定したシート名の､Cellで設定したセルが､Valueで設定した値であることを検査します｡ |
+| NotEmpty | SheetNameで設定したシート名の､Cellで設定したセルが､空ではないことを検査します｡ |
 
 ## 使用方法
 
-T.B.D.
+1. ｢ExcelFileInspector.exe｣を起動してください｡
+1. 検査設定をプリセットから選択してください｡
+1. 検査ファイルに検査対象フォルダもしくは検査対象ファイルをドラッグ&ドロップしてください｡
+1. ｢検査実施｣ボタンを押下してください｡
 
 ## 開発環境
 
