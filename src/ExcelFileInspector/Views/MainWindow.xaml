@@ -119,7 +119,7 @@
                 CanUserAddRows="False"
                 HeadersVisibility="Column"
                 IsReadOnly="True"
-                ItemsSource="{Binding InspectionResult}">
+                ItemsSource="{Binding InspectionResultList}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding FileName}" Header="{x:Static resources:Strings.FileName}" />
                     <DataGridTextColumn Binding="{Binding Cell}" Header="{x:Static resources:Strings.Cell}" />
@@ -145,7 +145,10 @@
                 </Hyperlink>
             </TextBlock>
             <Grid Margin="0,10,0,10">
-                <ProgressBar Maximum="100" Minimum="0" />
+                <ProgressBar
+                    Maximum="{Binding ProgressMaximum}"
+                    Minimum="0"
+                    Value="{Binding ProgressValue}" />
                 <TextBlock
                     Margin="0,5,0,5"
                     HorizontalAlignment="Center"

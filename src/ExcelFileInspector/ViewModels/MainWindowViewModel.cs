@@ -1,9 +1,11 @@
 ﻿using ExcelFileInspector.Utilities;
 using Prism.Commands;
 using Prism.Mvvm;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace ExcelFileInspector.ViewModels
@@ -86,11 +88,11 @@ namespace ExcelFileInspector.ViewModels
         /// <summary>
         /// 検査結果
         /// </summary>
-        private ObservableCollection<Inspector.InspectionResult> _inspectionResult = [];
-        public ObservableCollection<Inspector.InspectionResult> InspectionResult
+        private ObservableCollection<Inspector.InspectionResult> _inspectionResultList = [];
+        public ObservableCollection<Inspector.InspectionResult> InspectionResultList
         {
-            get { return _inspectionResult; }
-            set { SetProperty(ref _inspectionResult, value); }
+            get { return _inspectionResultList; }
+            set { SetProperty(ref _inspectionResultList, value); }
         }
 
         /// <summary>
@@ -101,6 +103,26 @@ namespace ExcelFileInspector.ViewModels
         {
             get { return _progressMessage; }
             set { SetProperty(ref _progressMessage, value); }
+        }
+
+        /// <summary>
+        /// プログレスバー最大値
+        /// </summary>
+        private int _progressMaximum = 1;
+        public int ProgressMaximum
+        {
+            get { return _progressMaximum; }
+            set { SetProperty(ref _progressMaximum, value); }
+        }
+
+        /// <summary>
+        /// プログレスバー現在値
+        /// </summary>
+        private int _progressValue = 0;
+        public int ProgressValue
+        {
+            get { return _progressValue; }
+            set { SetProperty(ref _progressValue, value); }
         }
 
         /// <summary>
@@ -192,9 +214,37 @@ namespace ExcelFileInspector.ViewModels
         /// <summary>
         /// 検査実施コマンド実行処理
         /// </summary>
-        private void ExecuteCommandInspection()
+        private async void ExecuteCommandInspection()
         {
+            List<Inspector.InspectionResult> inspectionResult = [];
+            List<SettingManager.InspectionMethod> inspectionMethods = new(InspectionMethods);
 
+            // 検査開始
+            InspectionResultList.Clear();
+            ProgressMaximum = InspectionFiles.Count;
+            ProgressValue = 0;
+            IsOperationEnable = false;
+            ProgressMessage = string.Format(Resources.Strings.MessageStatusNowInspection, ProgressValue, ProgressMaximum);
+
+            // 検査実施
+            await Task.Run(() =>
+            {
+                foreach (string file in InspectionFiles)
+                {
+                    List<Inspector.InspectionResult> inspectionResults = Inspector.InspectionFile(file, inspectionMethods);
+                    foreach (Inspector.InspectionResult result in inspectionResults)
+                    {
+                        inspectionResult.Add(result);
+                    }
+                    ProgressValue++;
+                    ProgressMessage = string.Format(Resources.Strings.MessageStatusNowInspection, ProgressValue, ProgressMaximum);
+                }
+            });
+
+            // 検査完了
+            InspectionResultList = new(inspectionResult);
+            IsOperationEnable = true;
+            ProgressMessage = Resources.Strings.MessageStatusCompleteInspection;
         }
 
         /// <summary>

@@ -189,7 +189,7 @@ namespace ExcelFileInspector.Resources {
         }
         
         /// <summary>
-        ///   {0}と等しくありませんでした｡ に類似しているローカライズされた文字列を検索します。
+        ///   &quot;{0}&quot;と等しくありませんでした｡ に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string MessageResultInspectionNGNotEqual {
             get {
@@ -216,6 +216,15 @@ namespace ExcelFileInspector.Resources {
         }
         
         /// <summary>
+        ///   検査が完了しました｡ に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string MessageStatusCompleteInspection {
+            get {
+                return ResourceManager.GetString("MessageStatusCompleteInspection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   検査ファイルが指定されていません｡ に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string MessageStatusInspectionFileEmpty {
@@ -230,6 +239,15 @@ namespace ExcelFileInspector.Resources {
         public static string MessageStatusInspectionMethodEmpty {
             get {
                 return ResourceManager.GetString("MessageStatusInspectionMethodEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   検査を行っています｡({0}/{1}) に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string MessageStatusNowInspection {
+            get {
+                return ResourceManager.GetString("MessageStatusNowInspection", resourceCulture);
             }
         }
         

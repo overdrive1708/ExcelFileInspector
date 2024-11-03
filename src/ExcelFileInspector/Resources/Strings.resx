@@ -151,7 +151,7 @@
     <value>結果</value>
   </data>
   <data name="MessageResultInspectionNGNotEqual" xml:space="preserve">
-    <value>{0}と等しくありませんでした｡</value>
+    <value>"{0}"と等しくありませんでした｡</value>
   </data>
   <data name="MessageResultInspectionNGEmpty" xml:space="preserve">
     <value>空です｡</value>
@@ -170,5 +170,11 @@
   </data>
   <data name="MessageStatusAlreadyInspection" xml:space="preserve">
     <value>準備が完了しました｡｢検査実施｣ボタン押下で検査を行います｡</value>
+  </data>
+  <data name="MessageStatusCompleteInspection" xml:space="preserve">
+    <value>検査が完了しました｡</value>
+  </data>
+  <data name="MessageStatusNowInspection" xml:space="preserve">
+    <value>検査を行っています｡({0}/{1})</value>
   </data>
 </root>
