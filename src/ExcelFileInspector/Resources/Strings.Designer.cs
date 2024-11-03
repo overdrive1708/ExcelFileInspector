@@ -70,11 +70,83 @@ namespace ExcelFileInspector.Resources {
         }
         
         /// <summary>
+        ///   セル に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Cell {
+            get {
+                return ResourceManager.GetString("Cell", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   条件 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Condition {
+            get {
+                return ResourceManager.GetString("Condition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   検査実施 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ExecuteInspection {
+            get {
+                return ResourceManager.GetString("ExecuteInspection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   ファイル名 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string FileName {
+            get {
+                return ResourceManager.GetString("FileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   重要なお知らせ に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string ImportantNotice {
             get {
                 return ResourceManager.GetString("ImportantNotice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   検査ファイル に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string InspectionFile {
+            get {
+                return ResourceManager.GetString("InspectionFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   検査方法 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string InspectionMethod {
+            get {
+                return ResourceManager.GetString("InspectionMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   検査結果 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string InspectionResult {
+            get {
+                return ResourceManager.GetString("InspectionResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   検査設定 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string InspectionSettings {
+            get {
+                return ResourceManager.GetString("InspectionSettings", resourceCulture);
             }
         }
         
@@ -95,6 +167,78 @@ namespace ExcelFileInspector.Resources {
         public static string MessageOpenProjectUrl {
             get {
                 return ResourceManager.GetString("MessageOpenProjectUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   空です｡ に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string MessageResultInspectionNGEmpty {
+            get {
+                return ResourceManager.GetString("MessageResultInspectionNGEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   {0}と等しくありませんでした｡ に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string MessageResultInspectionNGNotEqual {
+            get {
+                return ResourceManager.GetString("MessageResultInspectionNGNotEqual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   問題は見つかりませんでした｡ に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string MessageResultInspectionOK {
+            get {
+                return ResourceManager.GetString("MessageResultInspectionOK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   プリセット に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Preset {
+            get {
+                return ResourceManager.GetString("Preset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   結果 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Result {
+            get {
+                return ResourceManager.GetString("Result", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   シート名 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string SheetName {
+            get {
+                return ResourceManager.GetString("SheetName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   対象ファイルキーワード に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string TargetFileKeyword {
+            get {
+                return ResourceManager.GetString("TargetFileKeyword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   値 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Value {
+            get {
+                return ResourceManager.GetString("Value", resourceCulture);
             }
         }
     }

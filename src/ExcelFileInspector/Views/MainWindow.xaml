@@ -8,26 +8,124 @@
     xmlns:resources="clr-namespace:ExcelFileInspector.Resources"
     xmlns:viewmodels="clr-namespace:ExcelFileInspector.ViewModels"
     Title="{Binding Title}"
-    Width="640"
-    Height="480"
+    Width="1024 "
+    Height="768"
     d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel,
                                      IsDesignTimeCreatable=True}"
     prism:ViewModelLocator.AutoWireViewModel="True"
+    ResizeMode="NoResize"
     mc:Ignorable="d">
     <Grid>
-        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-            <StackPanel Margin="10,10,10,10">
-                <TextBlock HorizontalAlignment="Right" Text="{Binding Title}" />
-                <TextBlock HorizontalAlignment="Right" Text="{Binding Copyright}" />
-                <TextBlock HorizontalAlignment="Right">
-                    <Hyperlink
-                        Command="{Binding CommandOpenUrl}"
-                        CommandParameter="https://github.com/overdrive1708/ExcelFileInspector"
-                        Cursor="Hand">
-                        <TextBlock Text="{x:Static resources:Strings.MessageOpenProjectUrl}" />
-                    </Hyperlink>
-                </TextBlock>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="2*" />
+        </Grid.RowDefinitions>
+
+        <GroupBox
+            Grid.Row="0"
+            Grid.Column="0"
+            Margin="10,10,10,10"
+            Header="{x:Static resources:Strings.InspectionSettings}">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="10,5,5,5" Text="{x:Static resources:Strings.Preset}" />
+                    <ComboBox
+                        Width="400"
+                        Margin="5,5,10,5"
+                        ItemsSource="{Binding InspectionSettingPresetList}"
+                        SelectedItem="{Binding InspectionSettingPreset}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="10,5,5,5" Text="{x:Static resources:Strings.TargetFileKeyword}" />
+                    <TextBox
+                        Width="343"
+                        Margin="5,5,10,5"
+                        Text="{Binding TargetFileKeyword}" />
+                </StackPanel>
+                <TextBlock Margin="10,5,10,5" Text="{x:Static resources:Strings.InspectionMethod}" />
+                <DataGrid
+                    Height="150"
+                    Margin="10,5,10,5"
+                    AutoGenerateColumns="False"
+                    ItemsSource="{Binding InspectionMethods}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding SheetName}" Header="{x:Static resources:Strings.SheetName}" />
+                        <DataGridTextColumn Binding="{Binding Cell}" Header="{x:Static resources:Strings.Cell}" />
+                        <DataGridTextColumn Binding="{Binding Condition}" Header="{x:Static resources:Strings.Condition}" />
+                        <DataGridTextColumn Binding="{Binding Value}" Header="{x:Static resources:Strings.Value}" />
+                    </DataGrid.Columns>
+                </DataGrid>
             </StackPanel>
-        </ScrollViewer>
+        </GroupBox>
+
+        <GroupBox
+            Grid.Row="0"
+            Grid.Column="1"
+            Margin="10,10,10,10"
+            Header="{x:Static resources:Strings.InspectionFile}">
+            <ListBox Margin="10,5,10,5" ItemsSource="{Binding InspectionFiles}" />
+        </GroupBox>
+
+        <Button
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Margin="10,10,10,10"
+            Command="{Binding CommandInspection}"
+            Content="{x:Static resources:Strings.ExecuteInspection}"
+            IsEnabled="{Binding IsOperationEnable}" />
+
+        <GroupBox
+            Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Margin="10,10,10,10"
+            Header="{x:Static resources:Strings.InspectionResult}">
+            <DataGrid
+                Margin="10,5,10,5"
+                AutoGenerateColumns="False"
+                CanUserAddRows="False"
+                HeadersVisibility="Column"
+                IsReadOnly="True"
+                ItemsSource="{Binding InspectionResult}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding FileName}" Header="{x:Static resources:Strings.FileName}" />
+                    <DataGridTextColumn Binding="{Binding Cell}" Header="{x:Static resources:Strings.Cell}" />
+                    <DataGridTextColumn Binding="{Binding ResultMessage}" Header="{x:Static resources:Strings.Result}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+
+        <StackPanel
+            Grid.Row="3"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Margin="10,10,10,10"
+            VerticalAlignment="Bottom">
+            <TextBlock HorizontalAlignment="Right" Text="{Binding Title}" />
+            <TextBlock HorizontalAlignment="Right" Text="{Binding Copyright}" />
+            <TextBlock HorizontalAlignment="Right">
+                <Hyperlink
+                    Command="{Binding CommandOpenUrl}"
+                    CommandParameter="https://github.com/overdrive1708/ExcelFileInspector"
+                    Cursor="Hand">
+                    <TextBlock Text="{x:Static resources:Strings.MessageOpenProjectUrl}" />
+                </Hyperlink>
+            </TextBlock>
+            <Grid Margin="0,10,0,10">
+                <ProgressBar Maximum="100" Minimum="0" />
+                <TextBlock
+                    Margin="0,5,0,5"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Text="{Binding ProgressMessage}" />
+            </Grid>
+        </StackPanel>
     </Grid>
 </Window>
