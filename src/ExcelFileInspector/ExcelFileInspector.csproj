@@ -12,6 +12,9 @@
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
     <ApplicationIcon>Resources\AppIconExe-multisize.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>none</DebugType>
+  </PropertyGroup>
   <ItemGroup>
     <Resource Include="Resources\AppIconExe-multisize.ico" />
   </ItemGroup>
