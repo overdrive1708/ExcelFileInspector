@@ -1,15 +1,15 @@
 [
   {										// プリセット1
-    "PresetName": "プリセット1",			// プリセット名
-    "TargetFileKeyword": "KeywordA",		// 対象ファイルキーワード
+    "PresetName": "プリセット1",			// プリセット名 <--- プリセットを識別するための名前
+    "TargetFileKeyword": "KeywordA",		// 対象ファイルキーワード <--- このキーワードがあるファイルのみ検査対象として取り込む
     "InspectionMethods": [					// 検査方法
-      {											// 検査方法1
+      {											// 検査方法1 <--- SheetAのA1セルがOKかどうか検査
         "SheetName": "SheetA",						// シート名
         "Cell": "A1",								// セル
         "Condition": "Equal",						// 条件
         "Value": "OK"								// 値
       },
-      {											// 検査方法2
+      {											// 検査方法2 <--- SheetAのA2セルが空ではないか検査
         "SheetName": "SheetA",						// シート名
         "Cell": "A2",								// セル
         "Condition": "NotEmpty",					// 条件
