@@ -159,4 +159,16 @@
   <data name="MessageResultInspectionOK" xml:space="preserve">
     <value>問題は見つかりませんでした｡</value>
   </data>
+  <data name="ClearInspectionFile" xml:space="preserve">
+    <value>検査ファイルクリア</value>
+  </data>
+  <data name="MessageStatusInspectionMethodEmpty" xml:space="preserve">
+    <value>検査方法が設定されていません｡</value>
+  </data>
+  <data name="MessageStatusInspectionFileEmpty" xml:space="preserve">
+    <value>検査ファイルが指定されていません｡</value>
+  </data>
+  <data name="MessageStatusAlreadyInspection" xml:space="preserve">
+    <value>準備が完了しました｡｢検査実施｣ボタン押下で検査を行います｡</value>
+  </data>
 </root>

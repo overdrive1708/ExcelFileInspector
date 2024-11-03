@@ -79,6 +79,15 @@ namespace ExcelFileInspector.Resources {
         }
         
         /// <summary>
+        ///   検査ファイルクリア に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ClearInspectionFile {
+            get {
+                return ResourceManager.GetString("ClearInspectionFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   条件 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Condition {
@@ -194,6 +203,33 @@ namespace ExcelFileInspector.Resources {
         public static string MessageResultInspectionOK {
             get {
                 return ResourceManager.GetString("MessageResultInspectionOK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   準備が完了しました｡｢検査実施｣ボタン押下で検査を行います｡ に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string MessageStatusAlreadyInspection {
+            get {
+                return ResourceManager.GetString("MessageStatusAlreadyInspection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   検査ファイルが指定されていません｡ に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string MessageStatusInspectionFileEmpty {
+            get {
+                return ResourceManager.GetString("MessageStatusInspectionFileEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   検査方法が設定されていません｡ に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string MessageStatusInspectionMethodEmpty {
+            get {
+                return ResourceManager.GetString("MessageStatusInspectionMethodEmpty", resourceCulture);
             }
         }
         

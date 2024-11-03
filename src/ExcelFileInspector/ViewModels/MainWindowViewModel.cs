@@ -4,6 +4,7 @@ using Prism.Mvvm;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Reflection;
+using System.Windows;
 
 namespace ExcelFileInspector.ViewModels
 {
@@ -43,7 +44,7 @@ namespace ExcelFileInspector.ViewModels
         }
 
         /// <summary>
-        /// プリセット(選択状態)
+        /// 検査設定プリセット(選択状態)
         /// </summary>
         private string _inspectionSettingPreset = string.Empty;
         public string InspectionSettingPreset
@@ -122,6 +123,30 @@ namespace ExcelFileInspector.ViewModels
         public DelegateCommand CommandInspection => _commandInspection ??= new DelegateCommand(ExecuteCommandInspection);
 
         /// <summary>
+        /// プリセット選択変更
+        /// </summary>
+        private DelegateCommand _commandPresetChange;
+        public DelegateCommand CommandPresetChange => _commandPresetChange ??= new DelegateCommand(ExecuteCommandPresetChange);
+
+        /// <summary>
+        /// 検査ファイルクリア
+        /// </summary>
+        private DelegateCommand _commandClearInspectionFile;
+        public DelegateCommand CommandClearInspectionFile => _commandClearInspectionFile ??= new DelegateCommand(ExecuteCommandClearInspectionFile);
+
+        /// <summary>
+        /// 検査ファイルドラッグ
+        /// </summary>
+        private DelegateCommand<DragEventArgs> _commandInspectionPreviewDragOver;
+        public DelegateCommand<DragEventArgs> CommandInspectionPreviewDragOver => _commandInspectionPreviewDragOver ??= new DelegateCommand<DragEventArgs>(ExecuteCommandInspectionPreviewDragOver);
+
+        /// <summary>
+        /// 検査ファイルドロップ
+        /// </summary>
+        private DelegateCommand<DragEventArgs> _commandInspectionFileDrop;
+        public DelegateCommand<DragEventArgs> CommandInspectionFileDrop => _commandInspectionFileDrop ??= new DelegateCommand<DragEventArgs>(ExecuteCommandInspectionFileDrop);
+
+        /// <summary>
         /// URLを開く
         /// </summary>
         private DelegateCommand<string> _commandOpenUrl;
@@ -143,6 +168,25 @@ namespace ExcelFileInspector.ViewModels
 
             // コピーライト情報を取得して設定する
             Copyright = assm.GetCustomAttribute<AssemblyCopyrightAttribute>().Copyright;
+
+            if (!(bool)System.ComponentModel.DesignerProperties.IsInDesignModeProperty.GetMetadata(typeof(System.Windows.DependencyObject)).DefaultValue)
+            {
+                // 設定ファイルの読み込み
+                // (XAMLデザイナーのエラー対策でデザインモードではない場合のみ)
+                SettingManager.ReadSettings();
+            }
+            
+            // 検査設定プリセット(リスト)の作成
+            InspectionSettingPresetList = new(SettingManager.GetPresetList());
+
+            // 検査設定の反映(プリセットリスト先頭)
+            if (InspectionSettingPresetList.Count != 0)
+            {
+                LoadInspectionSettings(InspectionSettingPresetList[0]);
+            }
+
+            // 検査実施できるか確認
+            CheckExecuteInspection();
         }
 
         /// <summary>
@@ -154,12 +198,131 @@ namespace ExcelFileInspector.ViewModels
         }
 
         /// <summary>
+        /// プリセット選択変更コマンド実行処理
+        /// </summary>
+        void ExecuteCommandPresetChange()
+        {
+            // 検査設定の反映
+            LoadInspectionSettings(InspectionSettingPreset);
+        }
+
+        /// <summary>
+        /// 検査ファイルクリアコマンド実行処理
+        /// </summary>
+        void ExecuteCommandClearInspectionFile()
+        {
+            // 検査ファイルリストをクリア
+            InspectionFiles.Clear();
+
+            // 検査実施できるか確認
+            CheckExecuteInspection();
+        }
+
+        /// <summary>
+        /// 検査ファイルドラッグコマンド実行処理
+        /// </summary>
+        /// <param name="e">イベントデータ</param>
+        void ExecuteCommandInspectionPreviewDragOver(DragEventArgs e)
+        {
+            // ドラッグしてきたデータがファイルの場合､ドロップを許可する｡
+            e.Effects = DragDropEffects.Copy;
+            e.Handled = e.Data.GetDataPresent(DataFormats.FileDrop);
+        }
+
+        /// <summary>
+        /// 検査ファイルドロップコマンド実行処理
+        /// </summary>
+        /// <param name="e">イベントデータ</param>
+        private void ExecuteCommandInspectionFileDrop(DragEventArgs e)
+        {
+            // ドロップしてきたデータを解析する
+            if (e.Data.GetData(DataFormats.FileDrop) is string[] dropitems)
+            {
+                foreach (string dropitem in dropitems)
+                {
+                    if (System.IO.Directory.Exists(dropitem) == true)
+                    {
+                        // フォルダの場合は配下の対象ファイルキーワードを含むサポートExcelファイルを検査ファイルのリストに追加
+                        if (System.IO.Directory.GetFiles(@dropitem, "*", System.IO.SearchOption.AllDirectories) is string[] files)
+                        {
+                            foreach (string file in files)
+                            {
+                                if (file.Contains(TargetFileKeyword) && (System.IO.Path.GetExtension(file) == ".xlsx" || System.IO.Path.GetExtension(file) == ".xlsm"))
+                                {
+                                    InspectionFiles.Add(file);
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // 対象ファイルキーワードを含むサポートExcelファイルの場合は検査ファイルのリストに追加
+                        if (dropitem.Contains(TargetFileKeyword) && (System.IO.Path.GetExtension(dropitem) == ".xlsx" || System.IO.Path.GetExtension(dropitem) == ".xlsm"))
+                        {
+                            InspectionFiles.Add(dropitem);
+                        }
+                    }
+                }
+            }
+
+            // 検査実施できるか確認
+            CheckExecuteInspection();
+        }
+
+        /// <summary>
         /// URLを開くコマンド実行処理
         /// </summary>
         private void ExecuteCommandOpenUrl(string url)
         {
             ProcessStartInfo psi = new() { FileName = url, UseShellExecute = true };
             Process.Start(psi);
+        }
+
+        /// <summary>
+        /// 検査設定反映処理
+        /// </summary>
+        /// <param name="presetName">プリセット名</param>
+        private void LoadInspectionSettings(string presetName)
+        {
+            // プリセット取得
+            SettingManager.Setting setting = SettingManager.GetPreset(presetName);
+
+            // 検査設定プリセット(選択状態)に反映
+            InspectionSettingPreset = presetName;
+
+            // 対象ファイルキーワードに反映
+            TargetFileKeyword = setting.TargetFileKeyword;
+
+            // 検査方法(リスト)に反映
+            InspectionMethods = new(setting.InspectionMethods);
+
+            // 検査実施できるか確認
+            CheckExecuteInspection();
+        }
+
+        /// <summary>
+        /// 検査実施可否確認処理
+        /// </summary>
+        private void CheckExecuteInspection()
+        {
+            if (InspectionMethods.Count == 0)
+            {
+                // 検査設定の検査方法がない場合は検査実施不可
+                IsOperationEnable = false;
+                ProgressMessage = Resources.Strings.MessageStatusInspectionMethodEmpty;
+            }
+            else if(InspectionFiles.Count == 0)
+            {
+                // 検査ファイルがない場合は検査実施不可
+                IsOperationEnable = false;
+                ProgressMessage = Resources.Strings.MessageStatusInspectionFileEmpty;
+            }
+            else
+            {
+                // チェック通過時検査実施可能
+                IsOperationEnable = true;
+                ProgressMessage = Resources.Strings.MessageStatusAlreadyInspection;
+            }
         }
     }
 }
