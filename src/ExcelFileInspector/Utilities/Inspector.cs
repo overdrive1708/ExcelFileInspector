@@ -66,9 +66,35 @@ namespace ExcelFileInspector.Utilities
                                     results.Add(result);
                                 }
                                 break;
+                            case "NotEqual":
+                                // 指定されたセルが指定された値以外になっている場合はNG
+                                if (worksheet.Name.Equals(method.SheetName) && (worksheet.Cell(method.Cell).Value.ToString() != method.Value))
+                                {
+                                    result = new()
+                                    {
+                                        FileName = filename,
+                                        Cell = method.Cell,
+                                        ResultMessage = string.Format(Resources.Strings.MessageResultInspectionNGNotEqual, method.Value)
+                                    };
+                                    results.Add(result);
+                                }
+                                break;
+                            case "Empty":
+                                // 指定されたセルが空である場合はNG
+                                if (worksheet.Name.Equals(method.SheetName) && (worksheet.Cell(method.Cell).Value.ToString() == string.Empty))
+                                {
+                                    result = new()
+                                    {
+                                        FileName = filename,
+                                        Cell = method.Cell,
+                                        ResultMessage = Resources.Strings.MessageResultInspectionNGEmpty
+                                    };
+                                    results.Add(result);
+                                }
+                                break;
                             case "NotEmpty":
                                 // 指定されたセルが空ではない場合はNG
-                                if (worksheet.Name.Equals(method.SheetName) && !(worksheet.Cell(method.Cell).Value.ToString() == string.Empty))
+                                if (worksheet.Name.Equals(method.SheetName) && (worksheet.Cell(method.Cell).Value.ToString() != string.Empty))
                                 {
                                     result = new()
                                     {

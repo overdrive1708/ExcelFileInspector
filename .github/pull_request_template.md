@@ -1,3 +1,7 @@
+## 対応したIssue / Issue addressed
+
+Fix #xx
+
 ## 対応内容 / Correspondence contents
 
 ## 制約事項 / Restriction

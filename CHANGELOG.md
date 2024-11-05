@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Added feature by issue.([Issue #9](https://github.com/overdrive1708/ExcelFileInspector/issues/9))
+
 ### Changed
 - Changed by issue.([Issue #8](https://github.com/overdrive1708/ExcelFileInspector/issues/8))
 
