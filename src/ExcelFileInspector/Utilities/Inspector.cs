@@ -1,5 +1,6 @@
 ﻿using ClosedXML.Excel;
 using System.Collections.Generic;
+using System.IO;
 
 namespace ExcelFileInspector.Utilities
 {
@@ -40,9 +41,10 @@ namespace ExcelFileInspector.Utilities
             List<InspectionResult> results = [];
             InspectionResult result;
 
-            // Bookを開く
-            using (XLWorkbook workbook = new(filename))
+            // Bookを開く(読み取り専用で開く)
+            using (FileStream fs = new(filename, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
+                using XLWorkbook workbook = new(fs);
                 // 全シート調査
                 foreach (IXLWorksheet worksheet in workbook.Worksheets)
                 {
