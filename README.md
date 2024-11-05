@@ -42,8 +42,8 @@
 ｢InspectionSettings.json｣で設定するConditionは以下をサポートしています｡
 | Condition | 設定時の挙動 |
 |---|---|
-| Equal | SheetNameで設定したシート名の､Cellで設定したセルが､Valueで設定した値であることを検査します｡ |
-| NotEmpty | SheetNameで設定したシート名の､Cellで設定したセルが､空ではないことを検査します｡ |
+| Equal | SheetNameで設定したシート名の､Cellで設定したセルが､Valueで設定した値である場合にNGとします｡ |
+| NotEmpty | SheetNameで設定したシート名の､Cellで設定したセルが､空ではない場合にNGとします｡ |
 
 ## 使用方法
 

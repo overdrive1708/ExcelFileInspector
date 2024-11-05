@@ -3,13 +3,13 @@
     "PresetName": "プリセット1",			// プリセット名 <--- プリセットを識別するための名前
     "TargetFileKeyword": "KeywordA",		// 対象ファイルキーワード <--- このキーワードがあるファイルのみ検査対象として取り込む
     "InspectionMethods": [					// 検査方法
-      {											// 検査方法1 <--- SheetAのA1セルがOKかどうか検査
+      {											// 検査方法1 <--- SheetAのA1セルが｢NG｣の場合にNGとする
         "SheetName": "SheetA",						// シート名
         "Cell": "A1",								// セル
         "Condition": "Equal",						// 条件
-        "Value": "OK"								// 値
+        "Value": "NG"								// 値
       },
-      {											// 検査方法2 <--- SheetAのA2セルが空ではないか検査
+      {											// 検査方法2 <--- SheetAのA2セルが｢空ではない｣場合にNGとする
         "SheetName": "SheetA",						// シート名
         "Cell": "A2",								// セル
         "Condition": "NotEmpty",					// 条件
@@ -25,7 +25,7 @@
         "SheetName": "SheetB",						// シート名
         "Cell": "B1",								// セル
         "Condition": "Equal",						// 条件
-        "Value": "OK"								// 値
+        "Value": "NG"								// 値
       },
       {											// 検査方法2
         "SheetName": "SheetB",						// シート名
