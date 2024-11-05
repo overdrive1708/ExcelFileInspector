@@ -151,10 +151,10 @@
     <value>結果</value>
   </data>
   <data name="MessageResultInspectionNGNotEqual" xml:space="preserve">
-    <value>"{0}"と等しくありませんでした｡</value>
+    <value>値が"{0}"以外になっています｡</value>
   </data>
   <data name="MessageResultInspectionNGEmpty" xml:space="preserve">
-    <value>空です｡</value>
+    <value>空欄になっています｡</value>
   </data>
   <data name="MessageResultInspectionOK" xml:space="preserve">
     <value>問題は見つかりませんでした｡</value>
@@ -181,5 +181,11 @@
     <value>検査したいファイル　もしくは　検査したいファイルが含まれるフォルダを
 ドラッグ&amp;ドロップしてください｡
 対象ファイルキーワードを含むファイルのみ検査ファイルに登録されます｡</value>
+  </data>
+  <data name="MessageResultInspectionNGEqual" xml:space="preserve">
+    <value>値が"{0}"になっています｡</value>
+  </data>
+  <data name="MessageResultInspectionNGNotEmpty" xml:space="preserve">
+    <value>空欄以外になっています｡</value>
   </data>
 </root>

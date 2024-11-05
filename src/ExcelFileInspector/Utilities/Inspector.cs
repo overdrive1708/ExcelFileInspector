@@ -54,27 +54,27 @@ namespace ExcelFileInspector.Utilities
                         switch (method.Condition)
                         {
                             case "Equal":
-                                // 指定されたセルが指定された値になっている場合はOK -> 指定されたセルが指定された値になっていない場合はNG
-                                if (worksheet.Name.Equals(method.SheetName) && !(worksheet.Cell(method.Cell).Value.ToString() == method.Value))
+                                // 指定されたセルが指定された値になっている場合はNG
+                                if (worksheet.Name.Equals(method.SheetName) && (worksheet.Cell(method.Cell).Value.ToString() == method.Value))
                                 {
                                     result = new()
                                     {
                                         FileName = filename,
                                         Cell = method.Cell,
-                                        ResultMessage = string.Format(Resources.Strings.MessageResultInspectionNGNotEqual, method.Value)
+                                        ResultMessage = string.Format(Resources.Strings.MessageResultInspectionNGEqual, method.Value)
                                     };
                                     results.Add(result);
                                 }
                                 break;
                             case "NotEmpty":
-                                // 指定されたセルが空ではない場合はOK -> 指定されたセルが空の場合はNG
-                                if ((worksheet.Name.Equals(method.SheetName) && worksheet.Cell(method.Cell).Value.ToString() == string.Empty))
+                                // 指定されたセルが空ではない場合はNG
+                                if (worksheet.Name.Equals(method.SheetName) && !(worksheet.Cell(method.Cell).Value.ToString() == string.Empty))
                                 {
                                     result = new()
                                     {
                                         FileName = filename,
                                         Cell = method.Cell,
-                                        ResultMessage = Resources.Strings.MessageResultInspectionNGEmpty
+                                        ResultMessage = Resources.Strings.MessageResultInspectionNGNotEmpty
                                     };
                                     results.Add(result);
                                 }
