@@ -68,7 +68,7 @@ namespace ExcelFileInspector.Utilities
                                 break;
                             case "NotEqual":
                                 // 指定されたセルが指定された値以外になっている場合はNG
-                                if (worksheet.Name.Equals(method.SheetName) && !(worksheet.Cell(method.Cell).Value.ToString() == method.Value))
+                                if (worksheet.Name.Equals(method.SheetName) && (worksheet.Cell(method.Cell).Value.ToString() != method.Value))
                                 {
                                     result = new()
                                     {
@@ -94,7 +94,7 @@ namespace ExcelFileInspector.Utilities
                                 break;
                             case "NotEmpty":
                                 // 指定されたセルが空ではない場合はNG
-                                if (worksheet.Name.Equals(method.SheetName) && !(worksheet.Cell(method.Cell).Value.ToString() == string.Empty))
+                                if (worksheet.Name.Equals(method.SheetName) && (worksheet.Cell(method.Cell).Value.ToString() != string.Empty))
                                 {
                                     result = new()
                                     {
