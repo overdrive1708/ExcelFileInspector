@@ -9,10 +9,10 @@
         "Condition": "Equal",						// 条件
         "Value": "NG"								// 値
       },
-      {											// 検査方法2 <--- SheetAのA2セルが｢空ではない｣場合にNGとする
+      {											// 検査方法2 <--- SheetAのA2セルが｢空である｣場合にNGとする
         "SheetName": "SheetA",						// シート名
         "Cell": "A2",								// セル
-        "Condition": "NotEmpty",					// 条件
+        "Condition": "Empty",						// 条件
         "Value": "―"								// 値
       }
     ]
@@ -30,7 +30,7 @@
       {											// 検査方法2
         "SheetName": "SheetB",						// シート名
         "Cell": "B2",								// セル
-        "Condition": "NotEmpty",					// 条件
+        "Condition": "Empty",						// 条件
         "Value": "―"								// 値
       }
     ]
