@@ -1,8 +1,8 @@
 [日本語](README.md)
 
 <h1 align="center">
-    <a href="https://github.com/overdrive1708/ClipboardNumberToName">
-        <img alt="ClipboardNumberToName" src="docs/images/AppIconReadme.png" width="50" height="50">
+    <a href="https://github.com/overdrive1708/ExcelFileInspector">
+        <img alt="ExcelFileInspector" src="docs/images/AppIconReadme.png" width="50" height="50">
     </a><br>
     ExcelFileInspector
 </h1>
