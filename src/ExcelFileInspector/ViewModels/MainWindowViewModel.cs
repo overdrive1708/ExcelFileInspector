@@ -308,6 +308,11 @@ namespace ExcelFileInspector.ViewModels
                         {
                             foreach (string file in files)
                             {
+                                if (System.IO.Path.GetFileName(file).StartsWith("~$"))
+                                {
+                                    // 一時ファイルは追加しない
+                                    continue;
+                                }
                                 if (TargetFileKeyword == string.Empty)
                                 {
                                     // 対象ファイルキーワードが空の場合は拡張子のみ判定
@@ -329,6 +334,11 @@ namespace ExcelFileInspector.ViewModels
                     }
                     else
                     {
+                        if (System.IO.Path.GetFileName(dropitem).StartsWith("~$"))
+                        {
+                            // 一時ファイルは追加しない
+                            continue;
+                        }
                         if (TargetFileKeyword == string.Empty)
                         {
                             // 対象ファイルキーワードが空の場合は拡張子のみ判定
