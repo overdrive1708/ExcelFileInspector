@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.1] - 2024-11-14
+
 ### Fixed
 - Bug fix.([Issue #14](https://github.com/overdrive1708/ExcelFileInspector/issues/14))
 
@@ -26,5 +28,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Function to inspect the contents of an Excel file.
 
 [Unreleased]: https://github.com/overdrive1708/ExcelFileInspector
+[1.1.1]: https://github.com/overdrive1708/ExcelFileInspector/releases/tag/v1.1.1
 [1.1.0]: https://github.com/overdrive1708/ExcelFileInspector/releases/tag/v1.1.0
 [1.0.0]: https://github.com/overdrive1708/ExcelFileInspector/releases/tag/v1.0.0
