@@ -4,7 +4,7 @@
     <TargetFramework>net8.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <Product>ExcelFileInspector</Product>
-    <VersionPrefix>1.1.0</VersionPrefix>
+    <VersionPrefix>1.1.1</VersionPrefix>
     <Authors>overdrive1708</Authors>
     <Copyright>Copyright © 2024 overdrive1708</Copyright>
     <PackageProjectUrl>https://github.com/overdrive1708/ExcelFileInspector</PackageProjectUrl>
